@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "DCE Smart Ticket Auto-Closer (Agent Pro)",
+  "version": "1.0.0",
+  "description": "Streamlined 1-tap ticket categorization and notes logger for DEL CRM agents.",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "tabs",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://*.alteram.co.za/*",
+    "https://dcl.crmprod.alteram.co.za/*"
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "side_panel": {
+    "default_path": "panel/panel.html"
+  },
+  "action": {
+    "default_title": "Open DCE Auto-Closer"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.alteram.co.za/*",
+        "https://dcl.crmprod.alteram.co.za/*"
+      ],
+      "js": ["scripts/content_script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["presets.json"],
+      "matches": [
+        "https://*.alteram.co.za/*",
+        "https://dcl.crmprod.alteram.co.za/*"
+      ]
+    }
+  ]
+}
